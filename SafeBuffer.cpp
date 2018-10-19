@@ -8,6 +8,7 @@ SafeBuffer::SafeBuffer() {
 }
 
 SafeBuffer::~SafeBuffer() {
+	pthread_mutex_destroy(&mut);
 }
 
 int SafeBuffer::size() {

@@ -80,6 +80,7 @@ void* worker_thread_function(void* arg) {
         if(request == "quit") {
             args->workerChannel->cwrite("quit");
             delete args->workerChannel;
+            pthread_exit(NULL);
             break;
         }else{
             string response = args->workerChannel->cread();

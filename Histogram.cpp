@@ -19,6 +19,11 @@ Histogram::Histogram(){
 
 	pthread_mutex_init(&mut, NULL);
 }
+
+Histogram::~Histogram(){
+	pthread_mutex_destroy(&mut);
+}
+
 void Histogram::update (string request, string response){
 	pthread_mutex_lock(&mut);
 	int person_index = map [request];

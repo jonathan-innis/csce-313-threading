@@ -15,6 +15,7 @@ private:
 	pthread_mutex_t mut;
 public:
     Histogram();
+	~Histogram();
 	void update (string, string); 		// updates the histogram
     void print();						// prints the histogram
 };
