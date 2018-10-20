@@ -13,7 +13,7 @@
 #include <sstream>
 #include <iomanip>
 
-#include <chrono>
+#include <sys/time.h>
 #include <cassert>
 #include <assert.h>
 
@@ -117,7 +117,7 @@ int main(int argc, char * argv[]) {
         cout << "n == " << n << endl;
         cout << "w == " << w << endl;
 
-        chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+        clock_t begin = clock();
 
         cout << "CLIENT STARTED:" << endl;  
         cout << "Establishing control channel... " << flush;
@@ -175,11 +175,10 @@ int main(int argc, char * argv[]) {
         delete chan;
         cout << "All Done!!!" << endl; 
 
-        chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+        clock_t end = clock();
+
+        cout << "Time Elapsed: " << double(end - begin)/CLOCKS_PER_SEC << endl;
 
 		hist.print ();
-
-        auto duration = (float) ((end - start).count() / 1000000000.0);
-        cout << endl << "Elapsed Time: " << duration << "s" << endl;
     }
 }
