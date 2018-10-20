@@ -13,7 +13,7 @@
 #include <sstream>
 #include <iomanip>
 
-#include <sys/time.h>
+#include <chrono>
 #include <cassert>
 #include <assert.h>
 
@@ -117,6 +117,8 @@ int main(int argc, char * argv[]) {
         cout << "n == " << n << endl;
         cout << "w == " << w << endl;
 
+        chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+
         cout << "CLIENT STARTED:" << endl;  
         cout << "Establishing control channel... " << flush;
         RequestChannel *chan = new RequestChannel("control", RequestChannel::CLIENT_SIDE);
@@ -173,6 +175,11 @@ int main(int argc, char * argv[]) {
         delete chan;
         cout << "All Done!!!" << endl; 
 
+        chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+
 		hist.print ();
+
+        auto duration = (float) ((end - start).count() / 1000000000.0);
+        cout << endl << "Elapsed Time: " << duration << "s" << endl;
     }
 }
